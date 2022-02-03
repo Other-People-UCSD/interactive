@@ -1,0 +1,28 @@
+{
+    "story": [
+        {
+            "id": 1,
+            "text": [
+                "We sat on his bed after we were done. Trapped between him and the wall, I looked down on instinct. He hated that, had told me over and over that I needed to make eye contact or he'd feel like he was doing something wrong.",
+                "\"Look at me.\" He tilted my chin up toward him, leaning closer so that"
+            ],
+            "options": [
+                {
+                    "text": "Continue",
+                    "to": 2
+                },
+                {
+                    "text": "Back",
+                    "to": 0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "text": [
+                "<p>This is second passage</p>",
+                "<p style=\"text-indent:30px\">This is second passage's next paragraph</p>"
+            ]
+        }
+    ]
+}
