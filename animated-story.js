@@ -20,7 +20,7 @@ function timeAgo() {
         { div: Number.POSITIVE_INFINITY, name: 'years' }
     ]
     const timeSince = document.getElementById('missed-connections-date');
-    const pubDate = new Date('2023-02-01 08:00:00 +0000');
+    const pubDate = new Date('2023-02-08 02:50:00 +0000');
     let diff = (pubDate - new Date()) / 1000;
 
     for (let i = 0; i < AGO.length; i++) {
@@ -51,7 +51,7 @@ function beginStory() {
 async function story() {
     const one    = await writeTextChar(1, 20);
     const two    = await writeTextChar(2, 100);
-    const del1   = await delTextChar(1, 500);
+    const del1   = await delTextChar(1, 80);
     // const del0   = await delTextWord(1, 500);
     // const del3   = await delTextChar(2, 20);
     const three  = await writeTextChar(3, 10);
@@ -162,8 +162,7 @@ function delTextChar(id, rate) {
     return new Promise((resolve) => {
         const outText = document.getElementById(id + 'o');
         const text = document.getElementById(id).innerText;
-        
-
+    
         let i = text.length;
         const outStream = window.setInterval(function () {
             const l = text.substring(0, i - 1);
