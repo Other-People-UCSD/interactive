@@ -1,6 +1,6 @@
 .fadeIn { 
     animation-name: fadeIn;
-    animation-duration: 2500ms;
+    animation-duration: 5000ms;
 }
 
 @keyframes fadeIn {

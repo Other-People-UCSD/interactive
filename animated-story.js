@@ -49,11 +49,11 @@ function beginStory() {
  * @returns 0 on success
  */
 async function story() {
-    const shortPause = 1000*1;
-    const longPause = 1000*3;
-    const normalType = 40;
-    const slowType = normalType*2;
-    const slowerType = normalType*4;
+    const shortPause = document.getElementById('shortPause').value;         // 1000*1;
+    const longPause =  document.getElementById('longPause').value;         // 1000*3;
+    const normalType = document.getElementById('normal').value;         // 60;
+    const slowType =   document.getElementById('slow').value;         // normalType*2;
+    const slowerType = document.getElementById('slower').value;         // normalType*4;
 
 
     const w1    = await writeTextChar(1, normalType, shortPause);
@@ -71,12 +71,12 @@ async function story() {
     
     const w41    = await writeTextChar(41, slowType, shortPause);
     const w42    = await writeTextChar(42, normalType, shortPause);
-    const w43    = await writeTextChar(43, normalType, shortPause);
+    const w43    = await writeTextChar(43, normalType, longPause);
     const w44    = await writeTextChar(44, slowType, shortPause);
     
     const w51    = await writeTextChar(51, normalType, shortPause);
     const w52    = await writeTextChar(52, normalType);
-    const w53    = await writeTextChar(53, slowerType);
+    const w53    = await writeTextChar(53, slowerType, shortPause);
     const w54    = await writeTextChar(54, slowType);
     const w55    = await writeTextChar(55, normalType);
 
@@ -92,14 +92,14 @@ async function story() {
     const w85    = await writeTextChar(85, normalType);
     const w86    = await writeTextChar(86, slowerType);
     const w87    = await writeTextChar(87, normalType);
-    const w88    = await writeTextChar(88, slowType, shortPause);
+    const w88    = await writeTextChar(88, slowType, longPause);
     const w89    = await writeTextChar(89, normalType);
 
     const w91    = await writeTextChar(91, normalType, shortPause);
     const w92    = await writeTextChar(92, normalType, shortPause);
     const w93    = await writeTextChar(93, normalType);
     const w94    = await writeTextChar(94, slowType);
-    const w95    = await writeTextChar(95, normalType, shortPause);
+    const w95    = await writeTextChar(95, normalType, longPause);
     const w96    = await writeTextChar(96, normalType);
 
     const w101   = await writeTextChar(101, normalType);
@@ -114,10 +114,10 @@ async function story() {
 
     const w111   = await writeTextChar(111, normalType, longPause);
 
-    const delOut = await delPassage('output-text', shortPause);
+    const delOut = await delPassage('output-text', longPause);
 
-    const w121   = await writeTextChar(121, slowType);
-    const d121   = await delTextChar(121, slowerType);
+    const w121   = await writeTextChar(121, slowType. shortPause);
+    const d121   = await delTextChar(121, slowerType, longPause);
 
     const final = document.getElementById('final');
     final.classList.remove('hidden');
@@ -174,7 +174,7 @@ function writeTextChar(id, rate, delay) {
             i += update.inc;
 
             if (i >= refText.length) {
-                clearInterval(outStream);
+                clearInterval(outStream);                
                 setTimeout(() => { return resolve(id)}, delay);
             }
         }, rate);
@@ -309,3 +309,4 @@ function delPassage(id, delay) {
         }, delay);
     });
 }
+
