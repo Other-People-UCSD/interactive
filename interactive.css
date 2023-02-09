@@ -11,3 +11,12 @@
         opacity: 1;
     }
 }
+
+
+#begin {
+    border: black solid 1px;
+    background-color: #0079d3;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
