@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', function () {
-    timeAgo();
+    // timeAgo();
 });
 
 /**
@@ -20,7 +20,7 @@ function timeAgo() {
         { div: Number.POSITIVE_INFINITY, name: 'years' }
     ]
     const timeSince = document.getElementById('missed-connections-date');
-    const pubDate = new Date('2023-02-08 02:50:00 +0000');
+    const pubDate = new Date('2023-02-09 22:50:00 +0000');
     let diff = (pubDate - new Date()) / 1000;
 
     for (let i = 0; i < AGO.length; i++) {
@@ -71,53 +71,82 @@ async function story() {
     
     const w41    = await writeTextChar(41, slowType, shortPause);
     const w42    = await writeTextChar(42, normalType, shortPause);
-    const w43    = await writeTextChar(43, normalType, longPause);
-    const w44    = await writeTextChar(44, slowType, shortPause);
+    const w43    = await writeTextChar(43, normalType, shortPause);
+    const w44    = await writeTextChar(44, normalType, shortPause);
+    const w45    = await writeTextChar(45, normalType, shortPause);
+    const w46    = await writeTextChar(46, slowType, shortPause);
     
     const w51    = await writeTextChar(51, normalType, shortPause);
-    const w52    = await writeTextChar(52, normalType);
-    const w53    = await writeTextChar(53, slowerType, shortPause);
-    const w54    = await writeTextChar(54, slowType);
-    const w55    = await writeTextChar(55, normalType);
+    const w52    = await writeTextChar(52, normalType, shortPause);
+    const w53    = await writeTextChar(53, normalType);
+    const w54    = await writeTextChar(54, slowType, shortPause/2); // 120, 500
+    const w57    = await writeTextChar(57, slowType, shortPause/2);
+    const w58    = await writeTextChar(58, slowType, shortPause/2);
+    const w59    = await writeTextChar(59, slowType, shortPause/2);
+    // 40 120 180 1 3
 
-    const w61    = await writeTextChar(61, normalType, longPause);
+    const w55    = await writeTextChar(55, slowType, shortPause);
+    const w56    = await writeTextChar(56, normalType);
+    // 40 120 180 1 3
+
+    const w61    = await writeTextChar(61, normalType, shortPause);
     const w62    = await writeTextChar(62, normalType);
 
     const w71    = await writeTextChar(71, slowType, longPause);
-    
+    // 40 120 180 1 3
+
     const w81    = await writeTextChar(81, slowType, shortPause);
     const w82    = await writeTextChar(82, normalType, longPause);
     const w83    = await writeTextChar(83, normalType, shortPause);
     const w84    = await writeTextChar(84, normalType, shortPause);
+    const w850    = await writeTextChar(850, normalType, shortPause);
+
+    // 40 120 180 1 3
     const w85    = await writeTextChar(85, normalType);
     const w86    = await writeTextChar(86, slowerType);
     const w87    = await writeTextChar(87, normalType);
     const w88    = await writeTextChar(88, slowType, longPause);
-    const w89    = await writeTextChar(89, normalType);
-
+    const w89    = await writeTextChar(89, slowerType);
+    // 40 120 180 1 3
     const w91    = await writeTextChar(91, normalType, shortPause);
     const w92    = await writeTextChar(92, normalType, shortPause);
-    const w93    = await writeTextChar(93, normalType);
-    const w94    = await writeTextChar(94, slowType);
-    const w95    = await writeTextChar(95, normalType, longPause);
-    const w96    = await writeTextChar(96, normalType);
+    const w93    = await writeTextChar(93, normalType, shortPause);
+    const w930    = await writeTextChar(930, normalType, shortPause);
 
+    const w94    = await writeTextChar(94, slowType, longPause);
+    const w95    = await writeTextChar(95, normalType, shortPause);
+    const w96    = await writeTextChar(96, slowerType);
+    // 40 120 180 1 3
     const w101   = await writeTextChar(101, normalType);
-    const w102   = await writeTextChar(102, slowerType);
+    const w102   = await writeTextChar(102, 120, 500);
     const w103   = await writeTextChar(103, normalType, shortPause);
     const w104   = await writeTextChar(104, normalType, shortPause);
     const w105   = await writeTextChar(105, normalType, shortPause);
     const w106   = await writeTextChar(106, normalType);
     const w107   = await writeTextChar(107, slowType, longPause);
     const w108   = await writeTextChar(108, slowType, shortPause);
-    const w109   = await writeTextChar(109, slowType);
+    const w109   = await writeTextChar(109, slowType, shortPause);
 
     const w111   = await writeTextChar(111, normalType, longPause);
 
-    const delOut = await delPassage('output-text', longPause);
+    const delOut = await delPassage('output-text', 3000);
 
-    const w121   = await writeTextChar(121, slowType. shortPause);
-    const d121   = await delTextChar(121, slowerType, longPause);
+    const w121   = await writeTextChar(121, 120, 500);
+    const w122   = await writeTextChar(122, 120, 500);
+    const w123   = await writeTextChar(123, 120, 500);
+    const w124   = await writeTextChar(124, 120, 500);
+    const w125   = await writeTextChar(125, 120, 500);
+    const w126   = await writeTextChar(126, 120);
+    const w127   = await writeTextChar(127, 120, longPause);
+
+    const d126   = await delTextPhrase(122, 1000);
+    const d125   = await delTextPhrase(121, 500);
+    const d124   = await delTextPhrase(123, 500);
+    const d123   = await delTextPhrase(124, 500);
+    const d122   = await delTextPhrase(125, 500);
+    const d127   = await delTextPhrase(127, longPause);
+    const d121   = await delTextPhrase(126, longPause);
+
 
     const final = document.getElementById('final');
     final.classList.remove('hidden');
@@ -310,3 +339,19 @@ function delPassage(id, delay) {
     });
 }
 
+
+function delTextPhrase(id, delay) {
+    return new Promise((resolve) => {
+        const outText = document.getElementById(id + 'o');
+        const text = document.getElementById(id).innerText;
+    
+
+                const outParent = outText.parentElement;
+                outText.remove();
+                console.log(outParent.id);
+                if (outParent.children.length == 0) {
+                    outParent.remove();
+                }
+                setTimeout(() => { return resolve(id) }, delay);
+    });
+}
