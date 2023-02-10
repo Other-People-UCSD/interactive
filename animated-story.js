@@ -1,4 +1,9 @@
 window.addEventListener('DOMContentLoaded', function () {
+    this.document.getElementsByClassName('content-title')[0].remove();
+    this.document.getElementById('cr-article').classList.add('monospace');
+    this.document.getElementById('mc_embed_signup').innerHTML = ''; // Remove newsletter to keep focus on sttory
+
+
     // timeAgo();
 });
 
@@ -39,6 +44,9 @@ function timeAgo() {
  */
 function beginStory() {
     document.getElementById('begin').remove();
+    document.getElementById('mc-username').classList.toggle('hidden');
+    document.getElementById('mc-title').classList.toggle('hidden');
+
     story();
 }
 
@@ -49,12 +57,11 @@ function beginStory() {
  * @returns 0 on success
  */
 async function story() {
-    const shortPause = document.getElementById('shortPause').value;         // 1000*1;
-    const longPause =  document.getElementById('longPause').value;         // 1000*3;
-    const normalType = document.getElementById('normal').value;         // 60;
-    const slowType =   document.getElementById('slow').value;         // normalType*2;
-    const slowerType = document.getElementById('slower').value;         // normalType*4;
-
+    const shortPause = 1000*1;         // 1000*1;
+    const longPause =  1000*3;         // 1000*3;
+    const normalType = 40;         // 60;
+    const slowType =   120;         // normalType*2;
+    const slowerType = 180;         // normalType*4;
 
     const w1    = await writeTextChar(1, normalType, shortPause);
     const w2    = await writeTextChar(2, normalType, longPause);
@@ -129,7 +136,7 @@ async function story() {
 
     const w111   = await writeTextChar(111, normalType, longPause);
 
-    const delOut = await delPassage('output-text', 3000);
+    const delOut = await delPassage('output-text', 1000);
 
     const w121   = await writeTextChar(121, 120, 500);
     const w122   = await writeTextChar(122, 120, 500);
@@ -137,19 +144,19 @@ async function story() {
     const w124   = await writeTextChar(124, 120, 500);
     const w125   = await writeTextChar(125, 120, 500);
     const w126   = await writeTextChar(126, 120);
-    const w127   = await writeTextChar(127, 120, longPause);
+    const w127   = await writeTextChar(127, 120, 4000);
 
     const d126   = await delTextPhrase(122, 1000);
-    const d125   = await delTextPhrase(121, 500);
-    const d124   = await delTextPhrase(123, 500);
-    const d123   = await delTextPhrase(124, 500);
-    const d122   = await delTextPhrase(125, 500);
+    const d125   = delTextPhrase(121);
+    const d124   = delTextPhrase(123);
+    const d123   = delTextPhrase(124);
+    const d122   = await delTextPhrase(125, longPause);
     const d127   = await delTextPhrase(127, longPause);
-    const d121   = await delTextPhrase(126, longPause);
 
-
-    const final = document.getElementById('final');
-    final.classList.remove('hidden');
+    document.getElementById('output-text').remove();
+    document.getElementById('mc-title').classList.toggle('hidden');
+    document.getElementById('mc-final-username').classList.toggle('hidden');
+    const final = document.getElementById('final').classList.remove('hidden');
     return 0;
 }
 

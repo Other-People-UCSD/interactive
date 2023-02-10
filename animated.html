@@ -234,21 +234,22 @@
     <div class="cssanimation sequence fadeInBottom">
         <div class="content-title">
             <h1>
-                <div class="post_title">missed connections (1 unread post)
+                <div class="post_title">missed connections
             </h1>
         </div>
     </div>
 
     <article class="content">
-        <h3>/ Angel Sta. Maria</h3>
+        <h3>/ Angel Sta. Maria (Writer), Kevin Jang (Developer)</h3>
         <h4 class="meta">Poetry 4 min reading time</h4>
 
         <br />
 
         <article id="cr-article">
-            <!-- <p>r/OPM &#x2022; Posted by u/[username] <span id="missed-connections-date"></span></p> -->
-            <p><button id="begin" onclick="beginStory()" style="cursor: pointer">missed connections (1 unread post)</button> &#x2022; wherearetheOtherPeople</p>
-            <form>
+            <h1 id="mc-title">missed connections</h1>
+            <p><button id="begin" onclick="beginStory()" style="cursor: pointer">1 new post</button> <span id="mc-username">&#x2022; wherearetheOtherPeople</span></p>
+
+            <!-- <form>
                 <p>User controls to adjust the following<br>(in ms, 1000ms = 1 sec...smaller is faster)</p>
                 normal <input type="number" id="normal" name="normal" value="40"><br>
                 italics <input type="number" id="slow" name="slow" value="120"><br>
@@ -257,19 +258,27 @@
                 / time: <input type="number" id="shortPause" name="shortPause" value="1000"><br>
                 // time: <input type="number" id="longPause" name="longPause" value="3000">
 
-            </form>
+            </form> -->
             <!-- <p><button id="begin" onclick="beginStory()" style="cursor: pointer">Read Post (1)</button></p> -->
 
-            <div id="output-text" class="monospace">
+            <div id="output-text">
+                
             </div>
 
-            <p id="final" class="hidden fadeIn">Hey, I’m posting here to ask how I can focus on my classes among all these hot people? I thought I could finally focus on my studies now that it’s exam season, but jokes on me I guess! The only thing I’m studying right now is the pretty smile of the guy in front of me in line at Burger King. If you’re reading this, you in the Twilight hoodie and orange crocs please tell me you waved at me and not someone behind me. (Tho it was probably to someone else huh :(&nbsp;&nbsp;&nbsp;)</p>
+            <p id="mc-final-username" class="hidden">
+                today <span class="fadeIn">&#x2022; wherearetheOtherPeople</span>
+            </p>
+            <p id="final" class="hidden fadeInHighlight">
+                Hey, I’m posting here to ask how I can focus on my classes among all these hot people? I thought I could finally focus on my studies now that it’s exam season, but jokes on me I guess! The only thing I’m studying right now is the pretty smile of the guy in front of me in line at Burger King. If you’re reading this, you in the Twilight hoodie and orange crocs please tell me you waved at me and not someone behind me.
+                <br> 
+                <span style="font-size: 0.8rem;">Tho it was probably to someone else huh :(</span>
+            </p>
 
             <div id="missed-connections-ref-text" class="hidden">
 <p id="1ref">
     <span id="1">Hello. </span>
     <span id="2">I’m posting on here today to</span>
-    <span id="3">–is “today” too much of a relative term? Am I too formal?</span>
+    <span id="3">–is “today” too much of a relative term? Am I being too formal?</span>
 </p>
 <p id="2ref">
     <span id="21">Let’s try that again.</span>
@@ -282,12 +291,12 @@
     <span id="42">That doesn’t feel right. </span>
     <span id="43">I mean, “today” for me can mean yesterday for you. </span>
     <span id="44">But is there even another word that can replace it? </span>
-    <span id="45">“Just now” seems too urgent, and the longer the moments pass the more dated it becomes, even more so than “tomorrow”. “At this time of writing” seems too unfriendly</span>
+    <span id="45">“Just now” seems too urgent, and the longer the moments pass the more dated it becomes, even more so than “tomorrow.” “At this time of writing” seems too unfriendly</span>
     <span id="46">, no?</span>
 </p>
 <p id="5ref">
     <span id="51">Maybe the semantics of it are just complicated. </span>
-    <span id="52">Maybe my refusal to be satisfied with the word “today” comes from a stubborn emotion deep within my voracious psyche. Because on this page, it will always be “today”. Where its events will be immortalized in a perpetual state of present time. No deadline, </span>
+    <span id="52">Maybe my refusal to be satisfied with the word “today” comes from a stubborn emotion deep within my voracious psyche. Because on this page, it will always be “today.” Where its events will be immortalized in a perpetual state of present time. No deadline, </span>
     <span id="53">no lament over the arrival of a “tomorrow.” </span>
     <span id="54">But </span>
     <span id="57">that’s </span>

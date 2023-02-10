@@ -1,9 +1,9 @@
-.fadeIn { 
-    animation-name: fadeIn;
+.fadeInHighlight { 
+    animation-name: fadeInHighlight;
     animation-duration: 7000ms;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInHighlight {
     0% {
         opacity: 0;
         background-color: #ffb7b7;
@@ -14,11 +14,38 @@
     }
 }
 
+.fadeIn { 
+    animation-name: fadeIn;
+    animation-duration: 7000ms;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% { 
+        opacity: 1;
+        background-color: none;
+    }
+}
+
 
 #begin {
-    /* border: black solid 1px; */
-    /* background-color: #0079d3; */
+    border: black solid 1px;
+    background-color: #0079d3;
     border-radius: 5px;
     padding: 5px;
-    color: #0079d3;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.mc-username {
+    /* background-color: #ffc24f; */
+}
+
+#mc-title {
+    font-family: inherit;
+    text-transform: lowercase;
+    font-size: 1rem;
+    margin: 0;
 }
