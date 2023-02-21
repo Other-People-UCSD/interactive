@@ -1,10 +1,9 @@
 window.addEventListener('DOMContentLoaded', function () {
     this.document.getElementsByClassName('content-title')[0].remove();
     this.document.getElementById('cr-article').classList.add('monospace');
-    this.document.getElementById('mc_embed_signup').innerHTML = ''; // Remove newsletter to keep focus on sttory
+    timeAgo();
+    story();
 
-
-    // timeAgo();
 });
 
 /**
@@ -24,7 +23,7 @@ function timeAgo() {
         { div: 12, name: 'months'},
         { div: Number.POSITIVE_INFINITY, name: 'years' }
     ]
-    const timeSince = document.getElementById('missed-connections-date');
+    const timeSince = document.getElementById('mc-date');
     const pubDate = new Date('2023-02-09 22:50:00 +0000');
     let diff = (pubDate - new Date()) / 1000;
 
@@ -76,7 +75,7 @@ async function story() {
     // const w31    = await writeTextChar(31, normalType, shortPause);
     // const d31    = await delTextChar(31, 50, longPause);
     
-    const d41    = await delTextChar(41, 50);
+    const d41    = await delTextWord(41, 1000);
 
     // const w41    = await writeTextChar(41, slowType, shortPause);
     // const w42    = await writeTextChar(42, normalType, shortPause);
@@ -257,35 +256,30 @@ function checkTag(input) {
  */
 function delTextChar(id, rate, delay) {
     return new Promise((resolve) => {
-        const outText = document.getElementById(id + 'o');
-        let text = document.getElementById(id);
+        let outText = document.getElementById(id + 'o');
     
-        console.log(outText.innerHTML.length, outText.innerText.length);
-        console.log(text.innerHTML.length, text.innerText.length);
+        const outStream = window.setInterval(() => {
+            let currChild = outText.lastChild;
 
-        text = text.innerText;
-
-        let i = text.length;
-        const outStream = window.setInterval(function () {
-            const l = text.substring(0, i - 1);
-            // Keeping the text afterwards is required to keep any HTML elements (<br> tags) 
-            // at the end before the element is fully removed when iteration terminates
-            const r = outText.innerHTML.substring(i); 
-            outText.innerHTML = l + r;
-
-            i -= 1;
-            if (i < 0) {
-                clearInterval(outStream);
-                const outParent = outText.parentElement;
-                outText.remove();
-                console.log(outParent.id);
-                if (outParent.children.length == 0) {
-                    outParent.remove();
+            if (currChild.nodeType == 3) {
+                currChild.textContent = currChild.textContent.slice(0, -1);
+                if(currChild.textContent.length == 0) {
+                    currChild.remove();
                 }
+            } else if (currChild.nodeType != 3) {
+                currChild.innerHTML = currChild.innerHTML.slice(0, -1);
+                if(currChild.innerHTML.length == 0) {
+                    currChild.remove();
+                }
+            }
+
+            if(outText.lastChild == null) {
+                clearInterval(outStream);
+                outText.remove();
                 setTimeout(() => { return resolve(id) }, delay);
             }
         }, rate);
-    })
+    });
 }
 
 /**
@@ -294,43 +288,33 @@ function delTextChar(id, rate, delay) {
  * @param {int} rate  The speed in milliseconds that characters are deleted
  * @returns {Promise} Announces the function has finished deleting the targeted text 
  */
-function delTextWord(id, rate) {
+function delTextWord(id, rate, delay) {
     return new Promise((resolve) => {
         const outText = document.getElementById(id + 'o');
-        const text = document.getElementById(id);
 
-        console.log(text.innerHTML);
-        console.log(text.childNodes);
-        
-        let textWords = [];
-        text.childNodes.forEach(element => {
-            if (element.nodeType == 3) {
-                console.log(element.textContent);
-                textWords = textWords.concat(element.textContent.split(' '));
-            } else {
-                console.log(element.outerHTML)
-                const eName = element.nodeName
-                textWords.push('<' + eName + '>');
-                textWords = textWords.concat(element.innerText.split(' '));
-                if (!element.nodeName.includes('BR')) {
-                    textWords.push('</' + eName + '>');
+        const outStream = window.setInterval(() => {
+            let currChild = outText.lastChild;
+            
+            if (currChild.nodeType == 3) {
+                currText = currChild.textContent.split(' ');
+                currText.pop();
+                currChild.textContent = currText.join(' ');
+                 if(currChild.textContent.length == 0) {
+                    currChild.remove();
+                }
+            } else if (currChild.nodeType != 3) {
+                currText = currChild.innerHTML.split(' ');
+                currText.pop();
+                currChild.innerHTML = currText.join(' ');
+                if(currChild.innerHTML.length == 0) {
+                    currChild.remove();
                 }
             }
-        });
 
-        console.log(textWords);
-        let i = textWords.length;
-        const outStream = window.setInterval(function () {
-            if (!textWords[i] || textWords[i].startsWith("<")) {
-                i -= 1;
-            } else {
-                outText.innerHTML = textWords.splice(i, 1).join(' ');
-            }
-            
-            if (i < 0) {
+            if(outText.lastChild == null) {
                 clearInterval(outStream);
                 outText.remove();
-                return resolve(id);
+                setTimeout(() => { return resolve(id) }, delay);
             }
         }, rate);
     });
