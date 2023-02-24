@@ -49,3 +49,17 @@
     font-size: 1rem;
     margin: 0;
 }
+
+
+/* ----------------------------------
+---------------------------------------
+------------------------------------- */
+button {
+    cursor: pointer;
+    text-align: left;
+    text-transform: none;
+}
+
+ol {
+    list-style-type: upper-alpha;
+}
