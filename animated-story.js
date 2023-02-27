@@ -2,8 +2,6 @@ window.addEventListener('DOMContentLoaded', function () {
     this.document.getElementsByClassName('content-title')[0].remove();
     this.document.getElementById('cr-article').classList.add('monospace');
     timeAgo();
-    story();
-
 });
 
 /**
@@ -24,7 +22,7 @@ function timeAgo() {
         { div: Number.POSITIVE_INFINITY, name: 'years' }
     ]
     const timeSince = document.getElementById('mc-date');
-    const pubDate = new Date('2023-02-09 22:50:00 +0000');
+    const pubDate = new Date('2023-02-27 14:50:00 +0000');
     let diff = (pubDate - new Date()) / 1000;
 
     for (let i = 0; i < AGO.length; i++) {
