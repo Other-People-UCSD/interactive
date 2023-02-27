@@ -437,7 +437,8 @@
         {
             "id": "23",
             "text": [
-                "You have created an imaginary friend. Why do you think this story is told through a choose-your-own adventure format? "
+                "You have created an imaginary friend. Why do you think this story is told through a choose-your-own adventure format? ",
+                "<p id=\"23a\" class=\"hidden\">eOpen is true</p>"
             ],
             "options": [
                 {
@@ -579,12 +580,12 @@
             ],
             "options": [
                 {
-                    "to": "23",
-                    "text": "ASK FOR HELP"
+                    "to": "1",
+                    "text": "ASK FOR HELP TO E)"
                 },
                 {
-                    "to": "23",
-                    "text": "ASK FOR HELP"
+                    "to": "1",
+                    "text": "ASK FOR HELP TO E"
                 }
             ]
         },
@@ -596,12 +597,12 @@
             ],
             "options": [
                 {
-                    "to": "23",
-                    "text": "ASK FOR HELP"
+                    "to": "1",
+                    "text": "ASK FOR HELP TO E)"
                 },
                 {
-                    "to": "23",
-                    "text": "ASK FOR HELP"
+                    "to": "1",
+                    "text": "ASK FOR HELP TO E"
                 }
             ]
         },

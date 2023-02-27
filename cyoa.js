@@ -3,6 +3,46 @@ var dataJSON;
 var literature;
 var hist;
 const startId = 1;
+var passageEvents = {
+    'passage': [
+        { 'id': 1, 'vars': [{ 'action': 'set', 'target': 'eOpen', 'val': 'true' }] },
+        { 'id': 23, 'vars': [{ 'action': 'show', 'id': '23a', 'val': 'eOpen'}] },
+        { 'id': 31, 'vars': [{ 'action': 'show', 'id': '31a', 'val': 'eOpen', 'cond': 'false'},
+                             { 'action': 'show', 'id': '31b', 'val': 'eOpen', 'cond': 'true'}] },
+        { 'id': 32, 'vars': [{ 'action': 'show', 'id': '32a', 'val': 'eOpen', 'cond': 'false'},
+                             { 'action': 'show', 'id': '32b', 'val': 'eOpen', 'cond': 'true'}] },
+        // {'id': 35, 'vars': ["madeStory"]},
+        // {'id': 61, 'vars': ["madeStory"]},
+    ]
+};
+
+function checkEvents(toId) {
+    const passage = passageEvents['passage'];
+    for (let i = 0, len = passage.length; i < len; i++) {
+        console.log(passage[i]['id'])
+        if (passage[i]['id'] === toId) {
+            // console.log('HIT')
+            const pVars = Object.values(passage[i]['vars']);
+            
+            checkActions(pVars);
+            // console.log(pVars);
+            return;
+        }
+    }
+}
+
+function checkActions(pVars) {
+    for (let i = 0, len = pVars.length; i < len; i++) {
+        const query = pVars[i];
+        console.log(query);
+        if (query['action'] === 'set') {
+            console.log('yes')
+            setVar(query['target'], query['val']);
+        } else if (query['action'] === 'show') {
+            checkVar(query['id'], query['val'], query['cond']);
+        }
+    }
+}
 /**
  * When the page's DOM is loaded, this function will get the name of the JSON file by first looking 
  * up the textual value of 'post-src' and making a relative URL reference to it with .json appended 
@@ -86,6 +126,8 @@ function writePassage(fromId, toId) {
         createOptions(options, toId);
     }
 
+    checkEvents(toId);
+    
     if (hist.length > 0) {
         const backBtn = document.createElement('button');
         backBtn.addEventListener('click', () => {
@@ -108,13 +150,7 @@ function createOptions(options, fromId) {
 
         // console.log('f:', fromId, 't:', parseInt(options[i]['to']));
         optionBtn.addEventListener('click', () => {
-            
-            // Debug 
-            const textChoice = document.createElement('strong');
-            textChoice.innerHTML= '<br/>' + optionBtn.innerText + '->';
-            console.log(textChoice)
-            document.getElementById('output-text').append(textChoice);
-            
+            showChoiceClicked(optionBtn);
             goto(fromId, parseInt(options[i]['to']));
         });
 
@@ -137,6 +173,7 @@ function goto(fromId, toId, wentBack=false) {
         hist.push(toId);
     }
     console.log('goto', hist, wentBack);
+    removePrevChoices();
     return writePassage(fromId, parseInt(toId));
 };
 
@@ -156,13 +193,16 @@ function goBack() {
     goto(fromHere, peekNext, true);
 }
 
-function something(targetId, route) {
-    const mainReached = window.localStorage.getItem('theo-main-story');
-    if (JSON.parse(mainReached) === route) {
+function checkVar(targetId, varName, cond=true) {
+    const mainReached = window.localStorage.getItem(varName);
+    if (JSON.parse(mainReached) === JSON.parse(cond)) {
         showParagraph(targetId);
     }
 }
 
+function setVar(varName, value) {
+    window.localStorage.setItem(varName, value);
+}
 
 /**
  * Removes the button 
@@ -195,7 +235,26 @@ function parseString(obj) {
     return Function('"use strict";return ("' + obj + '")')();
 }
 
+function showChoiceClicked(optionBtn) {
+        // Debug 
+        const textChoice = document.createElement('strong');
+        textChoice.innerHTML= '<br/>' + optionBtn.innerText + '->';
+        console.log(textChoice)
+        document.getElementById('output-text').append(textChoice);
+}
 
+function removePrevChoices() {
+    ol = document.querySelectorAll('ol');
+    for (let i = 0, len = ol.length; i < len; i++) {
+        ol[i].remove();
+    }
+    btns = document.querySelectorAll('button');
+    
+    for (let i = 0, len = btns.length; i < len; i++) {
+
+        btns[i].remove();
+    }
+}
 /**
  * Not used
  * @param {String} id 
