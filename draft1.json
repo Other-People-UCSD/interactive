@@ -437,8 +437,8 @@
         {
             "id": "23",
             "text": [
-                "You have created an imaginary friend. Why do you think this story is told through a choose-your-own adventure format? ",
-                "<p id=\"23a\" class=\"hidden\">eOpen is true</p>"
+                "You have created an imaginary friend. Why do you think this story is told through a choose-your-own adventure format?",
+                "<button id=\"23a\" value=\"1\" class=\"hidden\">The author is obsessed with an escapist fantasy wherein all paths are known and explorable; mistakes and oversteps are reversible; and he has a friend to walk with.</button>"
             ],
             "options": [
                 {
@@ -580,12 +580,8 @@
             ],
             "options": [
                 {
-                    "to": "1",
-                    "text": "ASK FOR HELP TO E)"
-                },
-                {
-                    "to": "1",
-                    "text": "ASK FOR HELP TO E"
+                    "to": "62",
+                    "text": "The author is obsessed with an escapist fantasy wherein all paths are known and explorable; mistakes and oversteps are reversible; and he has a friend to walk with."
                 }
             ]
         },
@@ -597,12 +593,8 @@
             ],
             "options": [
                 {
-                    "to": "1",
-                    "text": "ASK FOR HELP TO E)"
-                },
-                {
-                    "to": "1",
-                    "text": "ASK FOR HELP TO E"
+                    "to": "62",
+                    "text": "The author is obsessed with an escapist fantasy wherein all paths are known and explorable; mistakes and oversteps are reversible; and he has a friend to walk with."
                 }
             ]
         },
@@ -1028,6 +1020,18 @@
             ]
         },
         {
+            "id": "62",
+            "text": [
+                " "
+            ],
+            "options": [
+                {
+                    "to": "1",
+                    "text": "Why should anybody want to be immortal?"
+                }
+            ]
+        },
+        {
             "id": "63",
             "text": [
                 "\u201cWell, if other people also only exist to me in the form of imaginary friends in my head, then dismissing you because I don\u2019t want to think about you anymore is tantamount to dismissing the thought of someone else. And if that\u2019s all they consist of to me, then ignoring you is like ignoring a real person.\u201d",
@@ -1086,7 +1090,9 @@
         {
             "id": "66",
             "text": [
-                "Ok, so you\u2019re not Bud Abbott. Then, who are you?"
+                "Ok, so you\u2019re not Bud Abbott. Then, who are you?",
+                "<p><button id=\"66a\" onclick=\"nextPara('66a', '66b')\">Vergil?</button></p>",
+                "<p id=\"66b\" class=\"hidden\">No, not even close.</p>"
             ],
             "options": [
                 {
@@ -1130,7 +1136,9 @@
             "id": "69",
             "text": [
                 "Ok, now that's more like it. Aside from the third-person reference to yourself.",
-                "I know I'm me because I can't access you, or your thoughts, or anything about you, except how you appear in the material world, which the only world I can access, as far as I know."
+                "I know I'm me because I can't access you, or your thoughts, or anything about you, except how you appear in the material world, which the only world I can access, as far as I know.",
+                "<p><button id=\"69a\" onclick=\"nextPara('69a', '69b')\">But you're a story you tell yourself. How do you know that that's you?</button></p>",
+                "<p id=\"69b\" class=\"hidden\">I suppose. But I don't know how to exist as a pure mass cloud of sensation being carried along by a flesh body; narrativization seems to be inherent to my mode of thinking, however hard I try. The motivations I assign myself are the closest thing I have to \"true\" motivations.</p>"
             ],
             "options": [
                 {
@@ -1142,7 +1150,9 @@
         {
             "id": "70",
             "text": [
-                "But if I'm you, and you're me, then who's driving the bus?"
+                "But if I'm you, and you're me, then who's driving the bus?",
+                "<p><button id=\"70a\" onclick=\"nextPara('70a', '70b')\">How would you know you're me? All you know about me is the image of me you have in your head.</button></p>",
+                "<p id=\"70b\" class=\"hidden\">Well, if you're saying I'm you, and you have a pretty good idea of what \"you\" is\u2014 are\u2014Then I guess I can take your word for it. But I don't think either of us really know what we are. Is. Am.</p>"
             ],
             "options": [
                 {
@@ -1187,6 +1197,20 @@
                 "I got off the bench and didn\u2019t look back for you. I walked all down the wide, loud thoroughfare. At one point the sidewalk stopped and I walked in the ditch by the rushing cars and let the noise fill my head like blood. I didn't look back for you.",
                 "I stopped at a place with no crosswalk and jaywalked when there were no cars coming. I looked left and right and left again then looked straight ahead while crossing.",
                 "I made it home eventually, and somewhere in the shadows behind me lurked a second person. Meanwhile, behind my lungs, the memory of the afternoon was crystalizing into a small hard object, like a gallbladder or kidney stone."
+            ],
+            "options": [
+                {
+                    "to": "23",
+                    "text": "Back to start"
+                }
+            ]
+        },
+        {
+            "id": "74",
+            "text": [
+                "\"Wh\u2014? You're the \"you\"  I've been creating? You're not the actual you reading this, you're the literal conception of a second person in my head?",
+                "<p><button id=\"74a\" onclick=\"nextPara('74a', '74b')\">Yes, and it took you way too long to reach this point. Come on, let's get on this horse and ride into the sunset together.</p>",
+                "<div id=\"74b\" class=\"hidden\"><p>Yes, and it took you way too long to reach this point. Come on, let's get on this horse and ride into the sunset together.</p> <p>Wow, you're just like I imagined... a cowboy... </p> <p><button id=\"74c\" onclick=\"nextPara('74c', '74d')\">Say a string of cowboy related words.</p></button><div id=\"74d\" class=\"hidden\"><p>\"Yeehaw, pardner. Giddyup. Ten gallons,\" you say, and spit magnificently.</p> <p>Huh. This is almost too similar to my prototypical cowboy for me to believe that you're real. No way is reality this close to my estimation of it. I guess I was able to tell Vergil apart from reality this entire time, and I just persisted for whatever motivation I'll tell myself later. Well, there are worse ways to spend eight years.</p></div>"
             ],
             "options": [
                 {

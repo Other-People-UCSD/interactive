@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
+<head> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>OPM TESTING PAGE</title>
@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="./interactive.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://otherpeoplesd.com/assets/js/bgTheme.js"></script>
+    <script src="https://otherpeoplesd.com/assets/js/header.js"></script>
     <script src="https://otherpeoplesd.com/assets/js/search-script.js"></script>
     <script src="https://otherpeoplesd.com/assets/js/announcement.js"></script>
-    <script src="https://otherpeoplesd.com/assets/js/copyright.js"></script>
+    <!-- <script src="https://otherpeoplesd.com/assets/js/copyright.js"></script> -->
 
     <link rel="icon" type="image/svg" href="https://otherpeoplesd.com/assets/favicons/TheFavicon.svg" />
     <link rel="icon" type="image/png" sizes="256x256"
@@ -144,92 +146,8 @@
                     </h4>
                 </footer>
             </div>
-
-            <script>
-                $('#search-input')
-                    .focus(function () {
-                        $(this).attr('placeholder', '')
-                    })
-                    .blur(function () {
-                        $(this).attr('placeholder', 'Search')
-                    })
-            </script>
-
-            <script>
-                $('#search-input').keyup(function (event) {
-                    if (event.which === 13) {
-                        $(this).blur();
-                    }
-                });
-            </script>
         </div>
     </div>
-
-    <script>
-        // Hide Header on on scroll down
-        var didScroll;
-        var lastScrollTop = 0;
-        var delta = 5;
-        var navbarHeight = $('header').outerHeight();
-
-        $(window).scroll(function (event) {
-            didScroll = true;
-        });
-
-        setInterval(function () {
-            if (didScroll) {
-                hasScrolled();
-                didScroll = false;
-            }
-        }, 250);
-
-        function hasScrolled() {
-            var st = $(this).scrollTop();
-
-            // Make sure they scroll more than delta
-            if (Math.abs(lastScrollTop - st) <= delta)
-                return;
-
-            // If they scrolled down and are past the navbar, add class .nav-up.
-            // This is necessary so you never see what is "behind" the navbar.
-            if (st > lastScrollTop && st > navbarHeight) {
-                // Scroll Down
-                $('header')
-                    .removeClass('nav-down')
-                    .addClass('nav-up');
-            } else {
-                // Scroll Up
-                if (st + $(window).height() < $(document).height()) {
-                    $('header')
-                        .removeClass('nav-up')
-                        .addClass('nav-down');
-                }
-            }
-
-            lastScrollTop = st;
-        }
-    </script>
-
-    <script>
-        function openNav() {
-            document
-                .getElementById("myNav")
-                .style
-                // .display = 'block';
-                .height = "100%";
-            document.getElementById('navContent').classList.remove('hidden');
-        }
-
-        function closeNav() {
-            document
-                .getElementById("myNav")
-                .style
-                // .display = 'none';
-                .height = "0%";
-            document.getElementById('navContent').classList.add('hidden');
-        }
-    </script>
-
 
     <div class="cssanimation sequence fadeInBottom">
         <div class="content-title">
@@ -249,7 +167,10 @@
                 
             </div>
 
-
+            <div id="progress-container">
+                <span id="progress-text"></span>
+                <div id="progress-bar"></div>
+            </div>
 
             
             <div id="story-ref" class="hidden">draft1</div>
