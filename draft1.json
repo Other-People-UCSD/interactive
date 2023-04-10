@@ -386,13 +386,12 @@
                 "\u201cIs admitting your vanity really better than just accepting you\u2019re supposed to be the reader?\u201d",
                 "\u201cIf I don\u2019t take myself seriously, who will? Wait, if I\u2019m writing for myself, then I guess I am the reader no matter what I do. Dang,\u201d Elizabeth said.",
                 "Vergil was slumped over again. \u201cI guess we\u2019ve discovered that we\u2019re all the writer and the reader. How post-modern and touchingly human. Man, whatever happened to the dichotomy of good and evil?\u201d he mumbled into his hand. \u201cYou used to love that stuff.\u201d",
-                "\u201cLook, you can pretend this stuff is easy because I\u2019m doing all the legwork. All you have to do is ask vague questions and say derisive stuff so I\u2019ll keep chasing after your approval. I had to learn how to touch-type for this nonsense.\u201d",
-                ""
+                "\u201cLook, you can pretend this stuff is easy because I\u2019m doing all the legwork. All you have to do is ask vague questions and say derisive stuff so I\u2019ll keep chasing after your approval. I had to learn how to touch-type for this nonsense.\u201d"
             ],
             "options": [
                 {
                     "to": "77",
-                    "text": "\u201cYou can't be doing this for me. Really, why carry on like this for so long?\" asked Vergil."
+                    "text": "\u201cYou can't be doing this for me. Really, why carry on like this for so long?\u201d asked Vergil."
                 },
                 {
                     "to": "46",
@@ -915,6 +914,33 @@
             ]
         },
         {
+            "id": "52",
+            "text": [
+                "\u201cDon\u2019t you have a back-up me in here somewhere?\u201d Vergil asked.",
+                "\u201cI wouldn\u2019t do that to you,\u201d Elizabeth said. Abbott was just on the other side of Vergil now. \u201cThere\u2019s really not enough room on the bench for this,\u201d she said.",
+                "\u201cWhy do you pretend not to have control over your own mind?\u201d Vergil asked.",
+                "Abbott said something misogynistic about women\u2019s intelligence.",
+                "\u201cI don\u2019t have control, really,\u201d Elizabeth said. \u201cI can\u2019t feel, for example, jealousy by turning on a switch. I have to work myself into that state.\u201d",
+                "\u201cSo, why are you in this state?\u201d",
+                "\u201cI think my thoughts are connected in ways that only make sense after I assign meaning to them,\u201d Elizabeth said. \u201cLike, I can say I thought of Bud because we were talking about other characters in this story, and he is one, but all I know is that one thought happened after the other.\u201d",
+                "Vergil slumped sideways, shoving Abbott off the bench. \u201cIf events have no bearing on each other, then why don\u2019t you start growing backwards? There seems to be some order to the world.\u201d"
+            ],
+            "options": [
+                {
+                    "to": "55",
+                    "text": "\u201cI\u2019m just trying to predict things,\u201d Elizabeth. \u201cThere may be forces beyond my perception.\u201d"
+                },
+                {
+                    "to": "53",
+                    "text": "Elizabeth found herself alone in a dark woods, facing a steep incline. Three beasts stalked towards her."
+                },
+                {
+                    "to": "54",
+                    "text": "LOOK AT TWINERY TO SEE HOW THIS OPTION IS CREATED"
+                }
+            ]
+        },
+        {
             "id": "53",
             "text": [
                 "\u201cHm,\u201d Elizabeth said. \u201cPerhaps I should\u2019ve been more grateful that my life appeared to have some rhyme and reason to it. Even if the point of my consciousness is still opaque to me, at least I was able to, like, experience the sunset. Even though that subjective experience will die with me, I experienced it\u2014that\u2019s not the same as it not happening. Oh, well. There are worse things than being eaten by three beasts. Like soliloquies.\u201d"
@@ -1004,6 +1030,22 @@
             ]
         },
         {
+            "id": "59",
+            "text": [
+                "\"Oh, real big of you. I\u2019m doing my best up here. It\u2019s not as easy as it looks.",
+                "<p><button id=\"59a\" onclick=\"nextPara('59a', '59b')\">Why are you up there if you don\u2019t know what you\u2019re saying?</button></p",
+                "<p id=\"59b\" class=\"hidden\">Why don\u2019t you make up a version of me and answer that yourself?</p",
+                "<p><button id=\"59c\" onclick=\"nextPara('59c', '59d')\">Why isn\u2019t there an option to leave anymore?</button></p",
+                "<p id=\"59d\" class=\"hidden\">If you want a standoff on which of us can waste more of the other's time, then that\u2019s what you\u2019re getting.</p>\""
+            ],
+            "options": [
+                {
+                    "to": "60",
+                    "text": "Ok, then give me a turn."
+                }
+            ]
+        },
+        {
             "id": "60",
             "text": [
                 "Ok, you asked for it. Here you go."
@@ -1016,6 +1058,18 @@
                 {
                     "to": "61",
                     "text": "This is a terrible interface."
+                }
+            ]
+        },
+        {
+            "id": "61",
+            "text": [
+                "Don't make me repeat the whole \u201cform of the blank influences your response.\u201d But fine. I'll do it better. Go nuts."
+            ],
+            "options": [
+                {
+                    "to": "23",
+                    "text": "Back to start"
                 }
             ]
         },
@@ -1259,11 +1313,11 @@
             "options": [
                 {
                     "to": "76",
-                    "text": "No, I think I wanted the sense of power over the image of someone I idolize, said Elizabeth, \"since I have so little power over how people see me usually.\""
+                    "text": "No, I think I wanted the sense of power over the image of someone I idolize, said Elizabeth, \u201csince I have so little power over how people see me usually.\u201d"
                 },
                 {
                     "to": "75",
-                    "text": "\"Haven't I heard this question asked before?\""
+                    "text": "\u201cHaven't I heard this question asked before?\u201d"
                 }
             ]
         }

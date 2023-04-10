@@ -229,10 +229,15 @@ function updateVisitedState(id) {
  */
 function bubbleVisited() {
     let idx = hist.length - 1;
-    let count;
-    do {
+    let count = 0;
+    while(idx > 0 && count == 0) {
         let id = hist[idx--];
+        // Stop if the rest of the parental routes have been cleared already
+        // if (routesVisited[id-1] == 2) {
+        //     break;
+        // }
         console.log('bubbling', id);
+
         const {_, options} = getPassageById(id);
 
         count = options.length;
@@ -250,7 +255,7 @@ function bubbleVisited() {
         if (count == 0) {
             routesVisited[id-1] = 2;
         }
-    } while(idx > 0 && count == 0);
+    }
 }
 
 /**
@@ -382,7 +387,6 @@ function beginStory(url) {
             hist = [];
             // console.log(dataJSON);
 
-            
             const progress = document.getElementById('progress-text');
             let progressCleared = window.localStorage.getItem('progress');
             if (progressCleared === 'null' || progressCleared === null) {
@@ -415,9 +419,9 @@ function beginStory(url) {
  * @param {Element} optionBtn 
  */
 function showChoiceClicked(optionBtn) {
-        const textChoice = document.createElement('strong');
-        textChoice.innerHTML= '<br/>' + optionBtn.innerText + '->';
-        document.getElementById('output-text').append(textChoice);
+    const textChoice = document.createElement('strong');
+    textChoice.innerHTML= '<br/>' + optionBtn.innerText + '->';
+    document.getElementById('output-text').append(textChoice);
 }
 
 /**
