@@ -3,19 +3,23 @@ localStorage
 eOpen
 progress
 routesVisited
+userTitle
+userStory
 */
 
 var dataJSON;
 var literature;
+var alignedIds; // Need to implement
 var hist;
 var routesVisited; // 0 = Never visited, 1 = Partially visited, 2 = All routes after have been visited
-const startId = 23;
+const startId = 1;
 var passageEvents = {
     'passage': [
         { 'id': 1, 'vars': [{ 'action': 'set', 'target': 'eOpen', 'val': 'true' }] },
         { 'id': 23, 'vars': [{ 'action': 'appendRoute', 'id': '23a', 'val': 'eOpen'}] },
-        // {'id': 35, 'vars': ["madeStory"]},
-        // {'id': 61, 'vars': ["madeStory"]},
+        {'id': 60, 'vars': [{ 'action': 'loadLS', 'target': 'userTitle', 'val': 'userTitle'}]},
+        {'id': 61, 'vars': [{ 'action': 'loadLS', 'target': 'userStory', 'val': 'userStory'},
+                            { 'action': 'loadLS', 'target': 'userTitle', 'val': 'userTitle'}]},
     ]
 };
 
@@ -49,6 +53,8 @@ function checkActions(pVars) {
             if (checkVar(query['id'], query['val'], query['cond'])) { showParagraph(query['id']); }
         } else if (query['action'] === 'appendRoute') {
             if (checkVar(query['id'], query['val'], query['cond'])) { appendRoute(query['id']);}
+        } else if (query['action'] === 'loadLS') {
+            loadVar(query['target'], query['val']);
         }
     }
 }
@@ -62,6 +68,10 @@ function setVar(varName, value) {
     window.localStorage.setItem(varName, value);
 }
 
+function loadVar(varName, value) {
+    const target = document.getElementById(varName);
+    target.value = window.localStorage.getItem(value);
+}
 /**
  * Checks if the event action variable's condition is satisfied to show a paragraph in a passage.
  * By default, the condition is true.
@@ -75,8 +85,10 @@ function checkVar(targetId, varName, cond=true) {
 }
 
 /**
- * Get the passage's data specified by its id. 
- * @param {Number} id 
+ * Fallback function to get the passage's data specified by its id. 
+ * Runtime O(n) where n is the number of passages in the story JSON.
+ * This is optimized to O(1) lookup if the id's are aligned in the story configuration.
+ * @param {Number} id The id of the passage to find.
  * @returns {Array, Array} The text and options array from the JSON file. 
  */
 function getPassageById(id) {
@@ -269,6 +281,9 @@ function goto(fromId, toId, wentBack=false) {
     }
     console.log('history: ', hist, wentBack);
     removePrevChoices();
+    if (toId === 23) {
+        removeEverything();
+    }
     return writePassage(fromId, parseInt(toId));
 };
 
@@ -353,6 +368,81 @@ function removePrevChoices() {
     }
 }
 
+function removeEverything() {
+    const content = document.getElementById('output-text');
+    content.innerText = '';
+}
+
+/**
+ * Saves the user's story title 
+ * For use in the next passage when they write their own story.
+ */
+function saveUserTitle() {
+    const title = document.getElementById('userTitle').value;
+    window.localStorage.setItem('userTitle', title);
+}
+
+function printUserStory() {
+    const userStory = document.getElementById('userStory').value;
+    if (userStory === 'null' || userStory === null) {
+        alert('Please write your story in the text box.');
+        return;
+    }
+    window.localStorage.setItem('userStory', userStory);
+
+    let userTitle = window.localStorage.getItem('userTitle');
+    if (userTitle === 'null' || userTitle === null) {
+        userTitle = 'You have created an imaginary story';
+    }
+
+    const printArea = document.getElementById('userPrint').parentElement;
+    
+    for (let i = printArea.childElementCount-1; i > 0; i--) {
+        printArea.removeChild(printArea.childNodes[i]);
+    }
+
+    const title = document.createElement('h3');
+    title.style.fontWeight = 'bold'
+    title.innerText = userTitle;
+    const text = document.createElement('div');
+    text.innerText = userStory;
+
+    printArea.appendChild(title);
+    printArea.appendChild(text);
+}
+
+/**
+ * Exports the reader's own story as a plaintext file.
+ * The name of the file is the name of the story they entered in the previous passage.
+ * Otherwise, a default name is given for the title.
+ * @returns 
+ */
+function saveUserStory() {
+    const userStory = document.getElementById('userStory').value;
+    if (userStory === 'null' || userStory === null) {
+        alert('Please write your story in the text box.');
+        return;
+    }
+    window.localStorage.setItem('userStory', userStory);
+
+    let userTitle = window.localStorage.getItem('userTitle');
+    if (userTitle === 'null' || userTitle === null) {
+        userTitle = 'You have created an imaginary story';
+    }
+
+    const temp = document.createElement('a');
+    
+    temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(userStory)); 
+    temp.setAttribute('download', userTitle);
+    temp.style.display = 'none';
+
+    const output = document.getElementById('output-text');
+    output.appendChild(temp);
+    temp.click();
+    output.removeChild(temp);
+}
+
+
 /**
  * When the page's DOM is loaded, this function will get the name of the JSON file by first looking 
  * up the textual value of 'post-src' and making a relative URL reference to it with .json appended 
@@ -390,7 +480,7 @@ function beginStory(url) {
             const progress = document.getElementById('progress-text');
             let progressCleared = window.localStorage.getItem('progress');
             if (progressCleared === 'null' || progressCleared === null) {
-                progressCleared = 0;
+                progressCleared = 1;
                 window.localStorage.setItem('progress', JSON.stringify(progressCleared));
                 
             }
@@ -462,5 +552,4 @@ function nextPara(btnId, targetId, remove=true) {
     if (remove) {
         btn.remove();
     }
-
 }

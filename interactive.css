@@ -99,3 +99,8 @@ ol {
 .route-fully-visited {
     color: #009833;
 }
+
+#userTitle {
+    background-color: inherit;
+    color: inherit;
+}

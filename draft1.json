@@ -1048,7 +1048,9 @@
         {
             "id": "60",
             "text": [
-                "Ok, you asked for it. Here you go."
+                "Ok, you asked for it. Here you go.",
+                "<input type=\"text\" id=\"userTitle\" placeholder=\"Make up a title\"></input>",
+                "<p><button onclick=\"saveUserTitle()\">Save title</button></p>"
             ],
             "options": [
                 {
@@ -1064,7 +1066,10 @@
         {
             "id": "61",
             "text": [
-                "Don't make me repeat the whole \u201cform of the blank influences your response.\u201d But fine. I'll do it better. Go nuts."
+                "Don't make me repeat the whole \u201cform of the blank influences your response.\u201d But fine. I'll do it better. Go nuts.",
+                "<textarea id=\"userStory\"></textarea>",
+                "<p><button id=\"userPrint\" onclick=\"printUserStory()\">I'm done, read my story.</button></p>",
+                "<p><button onclick=\"saveUserStory()\">I'm done, save my story.</button></p>"
             ],
             "options": [
                 {
