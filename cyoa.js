@@ -187,7 +187,7 @@ function createOptions(options, fromId) {
         optionBtn.innerText = parseString(text);
         
         // If the "back to start" route is an option, it is a route
-        if (toOpId === startId) {
+        if (toOpId === 23) {
             count--;
         }
         if (routesVisited[toOpId-1] == 2) {
@@ -257,7 +257,7 @@ function bubbleVisited() {
             let toOpId = parseInt(options[i]['to']);
         
             // If the "back to start" route is an option, it is a route
-            if (toOpId === startId) {
+            if (toOpId === 23) {
                 count--;
             }
             if (routesVisited[toOpId-1] == 2) {
