@@ -12,13 +12,15 @@ var literature;
 var alignedIds; // Need to implement
 var hist;
 var routesVisited; // 0 = Never visited, 1 = Partially visited, 2 = All routes after have been visited
-const startId = 1;
+const initId = 9;
+const restartId = 1;
 var passageEvents = {
     'passage': [
-        { 'id': 1, 'vars': [{ 'action': 'set', 'target': 'eOpen', 'val': 'true' }] },
-        { 'id': 23, 'vars': [{ 'action': 'appendRoute', 'id': '23a', 'val': 'eOpen'}] },
-        {'id': 60, 'vars': [{ 'action': 'loadLS', 'target': 'userTitle', 'val': 'userTitle'}]},
-        {'id': 61, 'vars': [{ 'action': 'loadLS', 'target': 'userStory', 'val': 'userStory'},
+        { 'id': 1, 'vars': [{ 'action': 'appendRoute', 'id': '1a', 'val': 'eOpen'}] },
+        { 'id': 8, 'vars': [{ 'action': 'set', 'target': 'eOpen', 'val': 'true' }] },
+        {'id': 59, 'vars': [{ 'action': 'loadLS', 'target': 'userTitle', 'val': 'userTitle'},
+                            { 'action': 'eventListener', 'target': 'userTitle'}]},
+        {'id': 60, 'vars': [{ 'action': 'loadLS', 'target': 'userStory', 'val': 'userStory'},
                             { 'action': 'loadLS', 'target': 'userTitle', 'val': 'userTitle'}]},
     ]
 };
@@ -47,14 +49,23 @@ function checkActions(pVars) {
     for (let i = 0, len = pVars.length; i < len; i++) {
         const query = pVars[i];
         console.log(query);
-        if (query['action'] === 'set') {
-            setVar(query['target'], query['val']);
-        } else if (query['action'] === 'show') {
-            if (checkVar(query['id'], query['val'], query['cond'])) { showParagraph(query['id']); }
-        } else if (query['action'] === 'appendRoute') {
-            if (checkVar(query['id'], query['val'], query['cond'])) { appendRoute(query['id']);}
-        } else if (query['action'] === 'loadLS') {
-            loadVar(query['target'], query['val']);
+        switch (query['action']) {
+            case 'set':
+                setVar(query['target'], query['val']);
+                break;
+            case 'show':
+                if (checkVar(query['id'], query['val'], query['cond'])) { showParagraph(query['id']); }
+                break;
+            case 'appendRoute':
+                if (checkVar(query['id'], query['val'], query['cond'])) { appendRoute(query['id']);}
+                break;
+            case 'loadLS':
+                loadVar(query['target'], query['val']);
+                break;
+            case 'eventListener':
+                eventListenerOpts(query['target']);
+            default:
+                break;
         }
     }
 }
@@ -84,6 +95,17 @@ function checkVar(targetId, varName, cond=true) {
     return JSON.parse(mainReached) === JSON.parse(cond);
 }
 
+const eventListenerOpts = (target) => {
+    switch (target) {
+        case 'userTitle':
+            document.getElementById('userTitle').addEventListener('change', (e) => {
+                saveUserTitle();
+            });
+            console.log('added event listener')
+        default:
+            break;
+    }
+} 
 /**
  * Fallback function to get the passage's data specified by its id. 
  * Runtime O(n) where n is the number of passages in the story JSON.
@@ -187,7 +209,7 @@ function createOptions(options, fromId) {
         optionBtn.innerText = parseString(text);
         
         // If the "back to start" route is an option, it is a route
-        if (toOpId === 23) {
+        if (toOpId === restartId) {
             count--;
         }
         if (routesVisited[toOpId-1] == 2) {
@@ -257,7 +279,7 @@ function bubbleVisited() {
             let toOpId = parseInt(options[i]['to']);
         
             // If the "back to start" route is an option, it is a route
-            if (toOpId === 23) {
+            if (toOpId === restartId) {
                 count--;
             }
             if (routesVisited[toOpId-1] == 2) {
@@ -281,7 +303,7 @@ function goto(fromId, toId, wentBack=false) {
     }
     console.log('history: ', hist, wentBack);
     removePrevChoices();
-    if (toId === 23) {
+    if (toId === restartId) {
         removeEverything();
     }
     return writePassage(fromId, parseInt(toId));
@@ -294,7 +316,7 @@ function goBack() {
     let fromHere = hist.pop();
     let peekNext;
     if (hist.length == 0) {
-        peekNext = startId;
+        peekNext = initId;
     } else {
         peekNext = hist.at(-1);
     }    
@@ -302,9 +324,6 @@ function goBack() {
     // console.log('goBack', hist, fromHere, peekNext);
     goto(fromHere, peekNext, true);
 }
-
-
-
 
 
 /**
@@ -315,6 +334,22 @@ function goBack() {
 function showParagraph(id) {
     const target = document.getElementById(id);
     target.classList.remove('hidden');
+}
+
+/**
+ * Removes the button of text that would show the next paragraph
+ * @param {Number} btnId 
+ * @param {Number} targetId 
+ * @param {Boolean} remove 
+ */
+function nextPara(btnId, targetId, remove=true) {
+    const btn = document.getElementById(btnId);
+    console.log(btnId, targetId);
+    showParagraph(targetId);
+
+    if (remove) {
+        btn.remove();
+    }
 }
 
 /**
@@ -330,7 +365,7 @@ function appendRoute(id) {
     routeBtn.addEventListener('click', () => {
         showChoiceClicked(routeBtn);
         updateVisitedState(routeBtn.value);
-        goto(numericId, routeBtn.value);
+        goto(numericId, parseInt(routeBtn.value));
     });
 
     if (routesVisited[routeBtn.value-1] == 2) {
@@ -368,9 +403,11 @@ function removePrevChoices() {
     }
 }
 
+/**
+ * Removes all content from the webpage.
+ */
 function removeEverything() {
-    const content = document.getElementById('output-text');
-    content.innerText = '';
+    document.getElementById('output-text').innerText = '';
 }
 
 /**
@@ -391,7 +428,8 @@ function printUserStory() {
     window.localStorage.setItem('userStory', userStory);
 
     let userTitle = window.localStorage.getItem('userTitle');
-    if (userTitle === 'null' || userTitle === null) {
+    console.log(userTitle)
+    if (userTitle === 'null' || userTitle === null || userTitle.length === 0) {
         userTitle = 'You have created an imaginary story';
     }
 
@@ -500,7 +538,7 @@ function beginStory(url) {
 
             allChildRoutesVisited = [];
 
-            writePassage(null, startId);
+            writePassage(null, initId);
         });
 }
 
@@ -523,6 +561,10 @@ function parseString(obj) {
     return Function('"use strict";return ("' + obj + '")')();
 }
 
+
+
+
+
 /**
  * Not used
  * @param {String} id 
@@ -536,20 +578,4 @@ function addBtnFunction(id) {
     eventBtn.addEventListener('click', () => {
         nextPara(id, id+'to');
     });
-}
-
-/**
- * Not used, meant to perform a 'redo' instead of 'back'.
- * @param {Number} btnId 
- * @param {Number} targetId 
- * @param {Boolean} remove 
- */
-function nextPara(btnId, targetId, remove=true) {
-    const btn = document.getElementById(btnId);
-    console.log(btnId, targetId);
-    showParagraph(targetId);
-
-    if (remove) {
-        btn.remove();
-    }
 }

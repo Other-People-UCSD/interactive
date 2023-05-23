@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head> 
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>OPM TESTING PAGE</title>
-    <link rel="stylesheet" href="https://otherpeoplesd.com/assets/css/main.css">
+    <link rel="stylesheet" href="https://other-people-ucsd.github.io/Pink-Currents/assets/css/main.css">
     <link rel="stylesheet" href="./interactive.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://otherpeoplesd.com/assets/js/bgTheme.js"></script>
-    <script src="https://otherpeoplesd.com/assets/js/header.js"></script>
-    <script src="https://otherpeoplesd.com/assets/js/search-script.js"></script>
-    <script src="https://otherpeoplesd.com/assets/js/announcement.js"></script>
+    <script src="https://other-people-ucsd.github.io/Pink-Currents/assets/js/header.js"></script>
     <!-- <script src="https://otherpeoplesd.com/assets/js/copyright.js"></script> -->
 
-    <link rel="icon" type="image/svg" href="https://otherpeoplesd.com/assets/favicons/TheFavicon.svg" />
-    <link rel="icon" type="image/png" sizes="256x256"
-        href="https://otherpeoplesd.com/assets/favicons/TheFavicon(256).png" />
-    <link rel="icon" type="image/png" sizes="128x128"
-        href="https://otherpeoplesd.com/assets/favicons/TheFavicon(128).png" />
-    <link rel="icon" type="image/png" sizes="64x64"
-        href="https://otherpeoplesd.com/assets/favicons/TheFavicon(64).png" />
+    <link rel="icon" type="image/svg"
+        href="https://other-people-ucsd.github.io/Pink-Currents/assets/favicons/TheFavicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32"
-        href="https://otherpeoplesd.com/assets/favicons/TheFavicon(32).png" />
+        href="https://other-people-ucsd.github.io/Pink-Currents/assets/favicons/TheFavicon(32).png" />
     <link rel="icon" type="image/png" sizes="16x16"
-        href="https://otherpeoplesd.com/assets/favicons/TheFavicon(16).png" />
+        href="https://other-people-ucsd.github.io/Pink-Currents/assets/favicons/TheFavicon(16).png" />
 
 </head>
 
@@ -56,21 +48,6 @@
                 <button class="closebtn" onclick="closeNav()" aria-label="Close Menu">Close</button>
             </div>
             <div class="mobile-nav">
-                <div class="mobile-nav2">
-                    <!-- Html Elements for Search -->
-                    <div id="search-container">
-                        <input type="text" id="search-input" placeholder="Search"
-                            aria-placeholder="Type here to search">
-                        <ul id="results-container"></ul>
-                    </div>
-
-                    <!-- Configuration -->
-                    <script>
-                        SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('results-container'), json: 'https://otherpeoplesd.com/search.json' })
-                    </script>
-                    <br>
-                </div>
-
                 <div class="genres">
                     <h3>Genres</h3>
                     <ul class="nav-menu">
@@ -164,7 +141,7 @@
 
         <article id="cr-article">
             <div id="output-text">
-                
+
             </div>
 
             <div id="progress-container">
@@ -172,13 +149,25 @@
                 <div id="progress-bar"></div>
             </div>
 
-            
+
             <div>
-                <button onclick="goto(23,28)">Go to 28</button><br />
-                <button onclick="goto(23,60)">Go to 60</button>
+                <button onclick="goto(1,3)">Go to 3</button><br />
+                <button onclick="goto(1,59)">Go to 59</button><br />
+                <button onclick="goto(1,39)">Go to 39</button><br />
+                <button onclick="shortcut()">Go to </button> <input name="target" value="1" id="shortcut">
+                <script>
+                    const shortcut = () => {
+                        goto(1, parseInt(document.getElementById('shortcut').value))
+                    }
+                    document.getElementById('shortcut').addEventListener("keydown", (e) => {
+                        if (e.code === "Enter") {
+                            shortcut()
+                        }
+                    });
+                </script>
             </div>
 
-            <div id="story-ref" class="hidden">draft1</div>
+            <div id="story-ref" class="hidden">final0523</div>
             <script src="./cyoa.js">
             </script>
 
